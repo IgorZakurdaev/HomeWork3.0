@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.openqa.selenium.bidi.script.LocalValue.setValue;
+
 
 public class DemoqaRegressFormTests {
     @BeforeAll
@@ -17,11 +17,13 @@ public class DemoqaRegressFormTests {
 
     }
     @Test
-    void StudentRegistrationFormTest(){
+    void studentRegistrationFormTest(){
         // селектор идентификатора # == "[key=value]"
         // селектор класса. пример .react-datepicker__month-select
         // $$когда нужный элемент является одним из группы однотипных элементов
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
 
         $("#firstName").setValue("Тест");
         $("#lastName").setValue("Тестов");
@@ -33,10 +35,11 @@ public class DemoqaRegressFormTests {
         $(".react-datepicker__month-select").selectOption("December");
         $(".react-datepicker__year-select").selectOption("1984");
         $$(".react-datepicker__day").findBy(text("11")).click();
-        $("#currentAddress").setValue("Пушкина 5");
+        $("#subjectsInput").setValue("History").pressEnter();
         $("div#hobbiesWrapper").$(byText("Sports")).click();
         $("div#hobbiesWrapper").$(byText("Music")).click();
         $("#uploadPicture").uploadFromClasspath("lobster-07.jpg");
+        $("#currentAddress").setValue("Пушкина 5");
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Delhi").pressEnter();
         $("#submit").click();
@@ -49,6 +52,7 @@ public class DemoqaRegressFormTests {
         $(".table-responsive").shouldHave(text("Female"));
         $(".table-responsive").shouldHave(text("1234567891"));
         $(".table-responsive").shouldHave(text("11 December,1984"));
+        $(".table-responsive").shouldHave(text("History"));
         $(".table-responsive").shouldHave(text("Sports, Music"));
         $(".table-responsive").shouldHave(text("lobster-07.jpg"));
         $(".table-responsive").shouldHave(text("Пушкина 5"));
@@ -56,4 +60,5 @@ public class DemoqaRegressFormTests {
 
 
     }
+
 }
