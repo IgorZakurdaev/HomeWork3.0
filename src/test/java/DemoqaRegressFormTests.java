@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class DemoqaRegressFormTests {
     @BeforeAll
-    static void BeforeAll(){
+    static void beforeAll(){
         Configuration.baseUrl ="https://demoqa.com";
         Configuration.browserSize ="1920x1080";
         Configuration.pageLoadStrategy ="eager";
@@ -21,6 +21,8 @@ public class DemoqaRegressFormTests {
         // селектор идентификатора # == "[key=value]"
         // селектор класса. пример .react-datepicker__month-select
         // $$когда нужный элемент является одним из группы однотипных элементов
+        // поиск по аттрибутам пример ("[placeholder ='Search GitHub']")
+        // одинарные кавычки используется когда есть пробел между словами
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -40,8 +42,10 @@ public class DemoqaRegressFormTests {
         $("div#hobbiesWrapper").$(byText("Music")).click();
         $("#uploadPicture").uploadFromClasspath("lobster-07.jpg");
         $("#currentAddress").setValue("Пушкина 5");
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
+        $("#state").click();
+        $("#stateCity-wrapper").$(byText("NCR")).click();
+        $("#city").click();
+        $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
 
         //asserts
