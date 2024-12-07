@@ -19,7 +19,17 @@ public class GitHubSearchTests {
         $("#wiki-tab").click();
         $("#wiki-body").shouldHave(text("Soft assertions"));
         $(byText("Soft assertions")).click();
-        $("*").shouldHave(text("JUnit5 extend test class"));
+        $("*").shouldHave(text("@ExtendWith({SoftAssertsExtension.class})\n" +
+                "class Tests {\n" +
+                "  @Test\n" +
+                "  void test() {\n" +
+                "    Configuration.assertionMode = SOFT;\n" +
+                "    open(\"page.html\");\n" +
+                "\n" +
+                "    $(\"#first\").should(visible).click();\n" +
+                "    $(\"#second\").should(visible).click();\n" +
+                "  }\n" +
+                "}"));
 
 
         sleep(6000);
