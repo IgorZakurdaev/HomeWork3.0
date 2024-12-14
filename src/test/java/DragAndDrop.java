@@ -16,8 +16,6 @@ public class DragAndDrop {
         Configuration.timeout=6000;
 
 
-        //$(actions().moveToElement($("#column-b")).
-        //                clickAndHold().moveByOffset(300, 200).release();
 
     }
     @Test
